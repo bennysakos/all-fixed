@@ -8,7 +8,7 @@ import asyncio
 import logging
 import os
 from dotenv import load_dotenv
-from keep_alive import start_keep_alive
+from keep_alive import start_keep_alive  # ✅ Added import
 
 from bot import RTanksBot
 
@@ -29,19 +29,20 @@ logger = logging.getLogger(__name__)
 
 async def main():
     """Main function to start the bot."""
+    # ✅ Start the web server before launching the bot
+    start_keep_alive()
+
     # Get Discord token from environment
     token = os.getenv('DISCORD_TOKEN')
     if not token:
         logger.error("DISCORD_TOKEN not found in environment variables!")
-        # Request token from user
         token = input("Please enter your Discord bot token: ").strip()
         if not token:
             logger.error("No token provided. Exiting.")
             return
-    
-    # Create and run the bot
+
     bot = RTanksBot()
-    
+
     try:
         logger.info("Starting RTanks Discord Bot...")
         await bot.start(token)
