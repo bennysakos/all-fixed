@@ -8,6 +8,7 @@ import asyncio
 import logging
 import os
 from dotenv import load_dotenv
+from keep_alive import start_keep_alive
 
 from bot import RTanksBot
 
